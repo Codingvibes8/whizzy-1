@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forge & Pixel — Websites That Sell & Take Orders</title>
+<meta name="description" content="UK web developer building online shops and food ordering sites for independent businesses. You own the site. No commission on your sales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14161c; --ink-2: #4a4f5c; --paper: #faf8f4; --card: #ffffff;
+    --line: #e7e2d8; --accent: #e8572a; --accent-ink: #fff; --deep: #1b2a3a; --soft: #fdeee7;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font: 16px/1.6 Inter, system-ui, sans-serif; color: var(--ink); background: var(--paper); }
+  h1, h2, h3 { font-family: Fraunces, Georgia, serif; line-height: 1.15; margin: 0 0 .5em; }
+  h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); }
+  h2 { font-size: clamp(1.7rem, 3.5vw, 2.6rem); }
+  h3 { font-size: 1.2rem; }
+  p { margin: 0 0 1em; color: var(--ink-2); }
+  a { color: inherit; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 88px 0; }
+  .eyebrow { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+  .btn { display: inline-block; padding: 14px 24px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid transparent; transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-ghost { border-color: currentColor; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+  /* nav */
+  header { position: sticky; top: 0; z-index: 10; background: rgba(250,248,244,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 16px; }
+  .logo { font-family: Fraunces, serif; font-weight: 700; font-size: 1.3rem; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; gap: 24px; align-items: center; }
+  nav a { text-decoration: none; font-weight: 500; font-size: .95rem; }
+  nav .btn { padding: 9px 18px; }
+  @media (max-width: 760px) { nav a:not(.btn) { display: none; } }
+
+  /* hero */
+  .hero { padding: 96px 0 72px; }
+  .hero p.lead { font-size: 1.2rem; max-width: 620px; }
+  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .stat b { display: block; font-family: Fraunces, serif; font-size: 1.6rem; }
+  .stat span { font-size: .9rem; color: var(--ink-2); }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } }
+
+  /* paths */
+  .paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 40px; }
+  .path { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
+  .path .ico { font-size: 1.8rem; }
+  .path p { font-size: .95rem; margin: 0; }
+  @media (max-width: 960px) { .paths { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .paths { grid-template-columns: 1fr; } }
+
+  /* services */
+  .services { background: var(--card); border-block: 1px solid var(--line); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0; }
+  .tabs button { font: inherit; font-weight: 500; font-size: .92rem; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); cursor: pointer; }
+  .tabs button[aria-pressed="true"] { background: var(--deep); color: #fff; border-color: var(--deep); }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .svc { border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; background: var(--paper); }
+  .svc[hidden] { display: none; }
+  .svc .tag { font-size: .75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+  .svc ul { margin: 12px 0 0; padding-left: 18px; color: var(--ink-2); font-size: .92rem; }
+  .svc li { margin-bottom: 4px; }
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+
+  /* process */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px; counter-reset: s; }
+  .step { padding-top: 16px; border-top: 3px solid var(--accent); }
+  .step::before { counter-increment: s; content: "0" counter(s); font-family: Fraunces, serif; font-size: 2rem; color: var(--accent); }
+  @media (max-width: 760px) { .steps { grid-template-columns: 1fr 1fr; } }
+
+  /* compare */
+  .compare { background: var(--deep); color: #fff; }
+  .compare p { color: #c4ccd6; }
+  table { width: 100%; border-collapse: collapse; margin-top: 32px; font-size: .95rem; }
+  th, td { text-align: left; padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,.12); vertical-align: top; }
+  th { font-family: Fraunces, serif; font-size: 1.05rem; }
+  td:nth-child(2) { color: #ffd3c2; font-weight: 500; }
+  td:nth-child(3) { color: #9aa6b4; }
+  @media (max-width: 600px) { th, td { padding: 10px 6px; font-size: .85rem; } }
+
+  /* pricing */
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 40px; }
+  .plan { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; }
+  .plan.featured { border: 2px solid var(--accent); box-shadow: 0 12px 40px rgba(232,87,42,.12); }
+  .price { font-family: Fraunces, serif; font-size: 2.4rem; margin: 8px 0 0; color: var(--ink); }
+  .price small { font-family: Inter, sans-serif; font-size: .9rem; color: var(--ink-2); }
+  .plan ul { padding-left: 18px; color: var(--ink-2); font-size: .93rem; flex: 1; }
+  .plan .btn { text-align: center; margin-top: 12px; }
+  @media (max-width: 860px) { .plans { grid-template-columns: 1fr; } }
+
+  /* faq */
+  details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+  summary { cursor: pointer; font-weight: 600; font-size: 1.05rem; }
+  details p { margin: 10px 0 0; }
+
+  /* contact */
+  .contact { background: var(--soft); }
+  .contact .wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; }
+  form { background: var(--card); border-radius: var(--radius); padding: 28px; border: 1px solid var(--line); display: grid; gap: 14px; }
+  label { font-weight: 500; font-size: .9rem; display: grid; gap: 6px; }
+  input, select, textarea { font: inherit; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); width: 100%; }
+  textarea { min-height: 120px; resize: vertical; }
+  @media (max-width: 860px) { .contact .wrap { grid-template-columns: 1fr; } }
+
+  footer { padding: 32px 0; font-size: .9rem; color: var(--ink-2); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Forge<span>&</span>Pixel</a>
+    <nav aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#process">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#contact">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Web developer for independent businesses</span>
+      <h1>A website that sells and takes orders.<br>Built for you, owned by you.</h1>
+      <p class="lead">I build fast, mobile-first websites for shops, cafés and makers, with online payments and ordering built in. No platform taking a cut of every sale, and no pile of plugins to keep paying for.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="#contact">Book a free 20-min call</a>
+        <a class="btn btn-ghost" href="#services">See what I build</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>0%</b><span>commission on your sales</span></div>
+        <div class="stat"><b>20+</b><span>features I can build in</span></div>
+        <div class="stat"><b>2–4 wks</b><span>typical launch time</span></div>
+        <div class="stat"><b>100%</b><span>yours: code, domain, data</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="paths" style="padding-top:0">
+    <div class="wrap">
+      <span class="eyebrow">What does your business do?</span>
+      <h2>Pick your starting point</h2>
+      <div class="paths">
+        <div class="path"><div class="ico" aria-hidden="true">🛍️</div><h3>Sell products</h3><p>Online shop with sizes and variants, click & collect, delivery rules, digital downloads and private trade pricing.</p></div>
+        <div class="path"><div class="ico" aria-hidden="true">🍕</div><h3>Take food orders</h3><p>Your own ordering site with no delivery-app cut: delivery zones, table QR ordering and kitchen dockets.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services">
+    <div class="wrap">
+      <span class="eyebrow">Services</span>
+      <h2>Everything I can build into your site</h2>
+      <p>Choose a category to see the features. Mix and match: you only pay for what your business uses.</p>
+      <div class="tabs" role="group" aria-label="Filter services">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="shop" aria-pressed="false">Selling products</button>
+        <button type="button" data-f="book" aria-pressed="false">Bookings</button>
+        <button type="button" data-f="food" aria-pressed="false">Food & takeaway</button>
+        <button type="button" data-f="pay" aria-pressed="false">Payments & POS</button>
+        <button type="button" data-f="grow" aria-pressed="false">Marketing & admin</button>
+      </div>
+
+      <div class="grid" id="svc-grid">
+        <article class="svc" data-c="shop"><span class="tag">Selling products</span><h3>Online shop & variants</h3><ul><li>Sizes, flavours, colours, add-on extras</li><li>Stock tracked per variant</li><li>Phone-friendly product pages</li></ul></article>
+        <article class="svc" data-c="shop"><span class="tag">Selling products</span><h3>Delivery & click & collect</h3><ul><li>Flat-rate and free-over-£X postage</li><li>Pickup day and time slots at checkout</li><li>Printable labels and packing slips</li></ul></article>
+        <article class="svc" data-c="shop"><span class="tag">Selling products</span><h3>Trade pricing & pre-orders</h3><ul><li>Passcode-unlocked wholesale prices</li><li>Minimum order quantities</li><li>Pre-order drops with caps and countdowns</li></ul></article>
+        <article class="svc" data-c="shop"><span class="tag">Selling products</span><h3>Digital downloads & bundles</h3><ul><li>Secure download links after payment</li><li>Gift boxes and mystery bundles</li><li>"Buy more, save more" basket discounts</li></ul></article>
+
+
+        <article class="svc" data-c="book"><span class="tag">Bookings</span><h3>Appointment booking</h3><ul><li>Live availability with buffers between clients</li><li>Upfront deposits to cut no-shows</li><li>Google, Apple & Outlook calendar sync</li></ul></article>
+        <article class="svc" data-c="book"><span class="tag">Bookings</span><h3>Team schedules & intake forms</h3><ul><li>Per-staff hours and services</li><li>"First available" or pick a stylist</li><li>Custom questions and photo uploads</li></ul></article>
+        <article class="svc" data-c="book"><span class="tag">Bookings</span><h3>Reminders & confirmations</h3><ul><li>Email and WhatsApp confirmations</li><li>Automatic reminders with directions</li><li>Clear cancellation terms</li></ul></article>
+
+        <article class="svc" data-c="food"><span class="tag">Food & takeaway</span><h3>Online ordering menu</h3><ul><li>Allergen and dietary badges with filters</li><li>Opening hours with "order for tomorrow"</li><li>Menu import from a photo of your paper menu</li></ul></article>
+        <article class="svc" data-c="food"><span class="tag">Food & takeaway</span><h3>Delivery zones & table QR</h3><ul><li>Delivery radius or postcode list</li><li>Distance-based delivery fees</li><li>Per-table QR codes, order and pay at the table</li></ul></article>
+        <article class="svc" data-c="food"><span class="tag">Food & takeaway</span><h3>Kitchen dockets</h3><ul><li>Clean, printable order slips</li><li>Notes and allergies highlighted</li><li>Status: preparing, out for delivery, ready</li></ul></article>
+
+        <article class="svc" data-c="pay"><span class="tag">Payments & POS</span><h3>Fast checkout</h3><ul><li>Apple Pay, Google Pay and cards via Stripe</li><li>Money goes straight to your own account</li><li>GBP, EUR or USD</li></ul></article>
+        <article class="svc" data-c="pay"><span class="tag">Payments & POS</span><h3>In-person payments</h3><ul><li>Phone or tablet as a payment terminal</li><li>QR pay codes and email receipts</li><li>Cash-on-collection switch</li></ul></article>
+
+
+        <article class="svc" data-c="grow"><span class="tag">Marketing & admin</span><h3>Reviews & loyalty</h3><ul><li>Automatic Google review requests</li><li>Digital stamp cards</li><li>Discount codes and gift vouchers</li></ul></article>
+        <article class="svc" data-c="grow"><span class="tag">Marketing & admin</span><h3>Bookkeeping exports</h3><ul><li>Sales CSVs for Xero, QuickBooks, Excel</li><li>UK VAT breakdowns</li><li>Any date range</li></ul></article>
+        <article class="svc" data-c="grow"><span class="tag">Marketing & admin</span><h3>Embed on your current site</h3><ul><li>Add a shop or menu widget</li><li>Works with WordPress, Wix, Squarespace, Webflow</li><li>Keep the site you already have</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <span class="eyebrow">How it works</span>
+      <h2>From first chat to launch day</h2>
+      <div class="steps">
+        <div class="step"><h3>Free call</h3><p>We talk through your business, what you sell and what is slowing you down.</p></div>
+        <div class="step"><h3>Fixed quote</h3><p>A clear price and feature list within 48 hours. No surprise invoices.</p></div>
+        <div class="step"><h3>Build & review</h3><p>You see progress on a private preview link and give feedback each week.</p></div>
+        <div class="step"><h3>Launch & support</h3><p>I go live, show you how to run it, and stay on hand for updates.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare">
+    <div class="wrap">
+      <span class="eyebrow">Why a custom build</span>
+      <h2>One site instead of six subscriptions</h2>
+      <p>Marketplaces and app bundles add up every month and don't talk to each other. A site built for you does it all in one place.</p>
+      <table>
+        <thead><tr><th scope="col">What you need</th><th scope="col">Built by me</th><th scope="col">Typical alternative</th></tr></thead>
+        <tbody>
+          <tr><td>Selling online</td><td>0% commission, only Stripe card fees</td><td>15–30% marketplace or delivery-app cut</td></tr>
+          <tr><td>Trade / wholesale pricing</td><td>Passcode-protected price list</td><td>Enterprise-tier ecommerce plans</td></tr>
+          <tr><td>Table ordering</td><td>QR codes on your own site</td><td>Dedicated hospitality apps and tablets</td></tr>
+          <tr><td>Bookkeeping</td><td>One-click VAT-ready exports</td><td>Manual spreadsheet entry</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <span class="eyebrow">Pricing</span>
+      <h2>Simple packages, fixed prices</h2>
+      <p>Every package includes mobile design, hosting setup, SSL, basic SEO and a handover session.</p>
+      <div class="plans">
+        <div class="plan">
+          <h3>Starter</h3>
+          <p class="price">£950 <small>one-off</small></p>
+          <ul><li>Up to 5-page website</li><li>Contact and enquiry forms</li><li>Google Business & local SEO setup</li><li>Embed one widget (shop or menu)</li></ul>
+          <a class="btn btn-ghost" href="#contact">Start with Starter</a>
+        </div>
+        <div class="plan featured">
+          <h3>Business</h3>
+          <p class="price">£2,400 <small>one-off</small></p>
+          <ul><li>Everything in Starter</li><li>Full shop or ordering system</li><li>Apple Pay, Google Pay & card checkout</li><li>Reviews and discount codes</li></ul>
+          <a class="btn btn-primary" href="#contact">Choose Business</a>
+        </div>
+        <div class="plan">
+          <h3>Care plan</h3>
+          <p class="price">£49 <small>/ month</small></p>
+          <ul><li>Hosting, backups and security updates</li><li>Up to 2 hours of changes a month</li><li>Monthly sales and traffic summary</li><li>Priority support by WhatsApp</li></ul>
+          <a class="btn btn-ghost" href="#contact">Add care plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="padding-top:0">
+    <div class="wrap" style="max-width:760px">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions</h2>
+      <details><summary>Do I need to be good with technology?</summary><p>No. I set everything up and show you how to add items, change prices and handle orders from your phone.</p></details>
+      <details><summary>Do you take a cut of my sales?</summary><p>Never. Payments go straight to your own Stripe account. You only pay Stripe's standard card fees.</p></details>
+      <details><summary>Can you add features to my existing website?</summary><p>Yes. I can embed a shop or menu on WordPress, Wix, Squarespace or Webflow without rebuilding your site.</p></details>
+      <details><summary>Who owns the website?</summary><p>You do: the domain, the code and your customer data. If you ever want to move on, you take everything with you.</p></details>
+      <details><summary>How long does it take?</summary><p>Most Starter sites launch in about two weeks; Business builds take three to four.</p></details>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Get in touch</span>
+        <h2>Tell me about your business</h2>
+        <p>Send a few details and I'll reply within one working day with ideas and a rough price. No obligation.</p>
+        <p><strong>Email:</strong> <a href="mailto:hello@example.com">hello@example.com</a><br><strong>Based in:</strong> UK, working remotely</p>
+      </div>
+      <!-- shortcut: mailto opens the visitor's mail app; swap for Formspree/Netlify Forms for a real inbox -->
+      <form action="mailto:hello@example.com" method="post" enctype="text/plain">
+        <label>Your name<input name="name" required autocomplete="name"></label>
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>What do you need?
+          <select name="need">
+            <option>Online shop</option><option>Food ordering</option><option>Add features to my current site</option><option>Not sure yet</option>
+          </select>
+        </label>
+        <label>Tell me a bit more<textarea name="message"></textarea></label>
+        <button class="btn btn-primary" type="submit" style="border:0;cursor:pointer;font:inherit;font-weight:600">Send enquiry</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr"></span> Forge & Pixel. Web development for independent businesses.</span>
+    <a href="#">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const btns = document.querySelectorAll('.tabs button');
+  btns.forEach(b => b.addEventListener('click', () => {
+    btns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.svc').forEach(s => s.hidden = b.dataset.f !== 'all' && s.dataset.c !== b.dataset.f);
+  }));
+</script>
+</body>
+</html>
