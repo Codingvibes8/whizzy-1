@@ -9,6 +9,13 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 
+// Clerk components require a ClerkProvider, so only render them when a real
+// publishable key was supplied at build time.
+const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+const clerkEnabled =
+  Boolean(clerkPublishableKey?.trim()) &&
+  !clerkPublishableKey?.includes("placeholder");
+
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -24,6 +31,12 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav aria-label="Main" className="hidden md:flex items-center gap-7">
+          <Link
+            href="/#demos"
+            className="text-[0.95rem] font-medium text-[#14161c] hover:text-[#e8572a] transition-colors"
+          >
+            Demo Stores
+          </Link>
           <Link
             href="/#services"
             className="text-[0.95rem] font-medium text-[#14161c] hover:text-[#e8572a] transition-colors"
@@ -50,19 +63,23 @@ export default function Navbar() {
           </Link>
 
           {/* Clerk Auth Section */}
-          <Show when="signed-out">
-            <SignInButton mode="modal">
-              <button
-                type="button"
-                className="text-[0.95rem] font-medium text-[#14161c] hover:text-[#e8572a] transition-colors cursor-pointer"
-              >
-                Sign in
-              </button>
-            </SignInButton>
-          </Show>
-          <Show when="signed-in">
-            <UserButton />
-          </Show>
+          {clerkEnabled && (
+            <>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    type="button"
+                    className="text-[0.95rem] font-medium text-[#14161c] hover:text-[#e8572a] transition-colors cursor-pointer"
+                  >
+                    Sign in
+                  </button>
+                </SignInButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </>
+          )}
 
           <Link
             href="/#contact"
@@ -74,19 +91,23 @@ export default function Navbar() {
 
         {/* Mobile menu trigger */}
         <div className="flex items-center gap-3 md:hidden">
-          <Show when="signed-out">
-            <SignInButton mode="modal">
-              <button
-                type="button"
-                className="text-xs font-semibold text-[#14161c] hover:text-[#e8572a] px-2 py-1"
-              >
-                Sign in
-              </button>
-            </SignInButton>
-          </Show>
-          <Show when="signed-in">
-            <UserButton />
-          </Show>
+          {clerkEnabled && (
+            <>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    type="button"
+                    className="text-xs font-semibold text-[#14161c] hover:text-[#e8572a] px-2 py-1"
+                  >
+                    Sign in
+                  </button>
+                </SignInButton>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
+            </>
+          )}
 
           <Link
             href="/#contact"
@@ -108,6 +129,13 @@ export default function Navbar() {
       {/* Mobile dropdown */}
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-[#e7e2d8] bg-[#faf8f4] px-5 py-4 space-y-3">
+          <Link
+            href="/#demos"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-base font-medium text-[#14161c] hover:text-[#e8572a]"
+          >
+            Demo Stores
+          </Link>
           <Link
             href="/#services"
             onClick={() => setMobileMenuOpen(false)}

@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { FEATURES } from "@/lib/features";
 
 export default function Hero() {
   const stats = [
     { value: "0%", label: "commission on your sales" },
-    { value: "20+", label: "features I can build in" },
+    { value: `${FEATURES.length}`, label: "features I can build in" },
     { value: "2–4 wks", label: "typical launch time" },
     { value: "100%", label: "yours: code, domain, data" },
   ];

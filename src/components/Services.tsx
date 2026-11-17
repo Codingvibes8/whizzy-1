@@ -1,236 +1,111 @@
-"use client";
+import Link from "next/link";
+import {
+  ArrowRight,
+  CalendarCheck,
+  CreditCard,
+  ShoppingBag,
+  Utensils,
+  type LucideIcon,
+} from "lucide-react";
+import {
+  FEATURE_CATEGORIES,
+  FEATURES,
+  HIGHLIGHT_FEATURES,
+  type FeatureCategory,
+} from "@/lib/features";
 
-import { useState } from "react";
+const categoryIcons: Record<FeatureCategory, LucideIcon> = {
+  food: Utensils,
+  bookings: CalendarCheck,
+  shop: ShoppingBag,
+  payments: CreditCard,
+  marketing: ArrowRight,
+};
 
-type Category = "all" | "shop" | "food" | "pay" | "grow";
-
-interface ServiceItem {
-  id: string;
-  category: "shop" | "food" | "pay" | "grow";
-  categoryLabel: string;
-  title: string;
-  bullets: string[];
-}
-
-const serviceItems: ServiceItem[] = [
-  // shop
-  {
-    id: "shop-1",
-    category: "shop",
-    categoryLabel: "Selling products",
-    title: "Online shop & variants",
-    bullets: [
-      "Sizes, flavours, colours, add-on extras",
-      "Stock tracked per variant",
-      "Phone-friendly product pages",
-    ],
-  },
-  {
-    id: "shop-2",
-    category: "shop",
-    categoryLabel: "Selling products",
-    title: "Delivery & click & collect",
-    bullets: [
-      "Flat-rate and free-over-£X postage",
-      "Pickup day and time slots at checkout",
-      "Printable labels and packing slips",
-    ],
-  },
-  {
-    id: "shop-3",
-    category: "shop",
-    categoryLabel: "Selling products",
-    title: "Trade pricing & pre-orders",
-    bullets: [
-      "Passcode-unlocked wholesale prices",
-      "Minimum order quantities",
-      "Pre-order drops with caps and countdowns",
-    ],
-  },
-  {
-    id: "shop-4",
-    category: "shop",
-    categoryLabel: "Selling products",
-    title: "Digital downloads & bundles",
-    bullets: [
-      "Secure download links after payment",
-      "Gift boxes and mystery bundles",
-      '"Buy more, save more" basket discounts',
-    ],
-  },
-  // food
-  {
-    id: "food-1",
-    category: "food",
-    categoryLabel: "Food & takeaway",
-    title: "Online ordering menu",
-    bullets: [
-      "Allergen and dietary badges with filters",
-      'Opening hours with "order for tomorrow"',
-      "Menu import from a photo of your paper menu",
-    ],
-  },
-  {
-    id: "food-2",
-    category: "food",
-    categoryLabel: "Food & takeaway",
-    title: "Delivery zones & table QR",
-    bullets: [
-      "Delivery radius or postcode list",
-      "Distance-based delivery fees",
-      "Per-table QR codes, order and pay at the table",
-    ],
-  },
-  {
-    id: "food-3",
-    category: "food",
-    categoryLabel: "Food & takeaway",
-    title: "Kitchen dockets",
-    bullets: [
-      "Clean, printable order slips",
-      "Notes and allergies highlighted",
-      "Status: preparing, out for delivery, ready",
-    ],
-  },
-  // pay
-  {
-    id: "pay-1",
-    category: "pay",
-    categoryLabel: "Payments & POS",
-    title: "Fast checkout",
-    bullets: [
-      "Apple Pay, Google Pay and cards via Stripe",
-      "Money goes straight to your own account",
-      "GBP, EUR or USD",
-    ],
-  },
-  {
-    id: "pay-2",
-    category: "pay",
-    categoryLabel: "Payments & POS",
-    title: "In-person payments",
-    bullets: [
-      "Phone or tablet as a payment terminal",
-      "QR pay codes and email receipts",
-      "Cash-on-collection switch",
-    ],
-  },
-  // grow
-  {
-    id: "grow-1",
-    category: "grow",
-    categoryLabel: "Marketing & admin",
-    title: "Reviews & loyalty",
-    bullets: [
-      "Automatic Google review requests",
-      "Digital stamp cards",
-      "Discount codes and gift vouchers",
-    ],
-  },
-  {
-    id: "grow-2",
-    category: "grow",
-    categoryLabel: "Marketing & admin",
-    title: "Bookkeeping exports",
-    bullets: [
-      "Sales CSVs for Xero, QuickBooks, Excel",
-      "UK VAT breakdowns",
-      "Any date range",
-    ],
-  },
-  {
-    id: "grow-3",
-    category: "grow",
-    categoryLabel: "Marketing & admin",
-    title: "Embed on your current site",
-    bullets: [
-      "Add a shop or menu widget",
-      "Works with WordPress, Wix, Squarespace, Webflow",
-      "Keep the site you already have",
-    ],
-  },
-];
-
-const tabs: { key: Category; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "shop", label: "Selling products" },
-  { key: "food", label: "Food & takeaway" },
-  { key: "pay", label: "Payments & POS" },
-  { key: "grow", label: "Marketing & admin" },
-];
+const categoryLabels = Object.fromEntries(
+  FEATURE_CATEGORIES.map((category) => [category.key, category.label]),
+) as Record<FeatureCategory, string>;
 
 export default function Services() {
-  const [activeCategory, setActiveCategory] = useState<Category>("all");
-
-  const filteredItems =
-    activeCategory === "all"
-      ? serviceItems
-      : serviceItems.filter((item) => item.category === activeCategory);
-
   return (
-    <section id="services" className="bg-white border-y border-[#e7e2d8] py-20 md:py-24">
+    <section
+      id="services"
+      className="bg-white border-y border-[#e7e2d8] py-20 md:py-24"
+    >
       <div className="max-w-[1120px] mx-auto px-5">
         <span className="inline-block text-xs font-semibold tracking-wider uppercase text-[#e8572a] mb-3">
           Services
         </span>
         <h2 className="font-serif text-[clamp(1.7rem,3.5vw,2.6rem)] font-bold text-[#14161c] mb-3 leading-tight">
-          Everything I can build into your site
+          The features that do the heavy lifting
         </h2>
-        <p className="text-[#4a4f5c] text-[1.05rem] max-w-[620px] leading-relaxed mb-8">
-          Choose a category to see the features. Mix and match: you only pay for
-          what your business uses.
+        <p className="text-[#4a4f5c] text-[1.05rem] max-w-[620px] leading-relaxed mb-10">
+          A quick look at the four things owners ask for most. Everything is
+          modular — you only pay for what your business uses.
         </p>
 
-        {/* Filter buttons */}
-        <div
-          className="flex flex-wrap gap-2 mb-10"
-          role="group"
-          aria-label="Filter services"
-        >
-          {tabs.map((tab) => {
-            const isActive = activeCategory === tab.key;
+        {/* Highlight reel */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {HIGHLIGHT_FEATURES.map((feature) => {
+            const Icon = categoryIcons[feature.category];
+
             return (
-              <button
-                key={tab.key}
-                type="button"
-                onClick={() => setActiveCategory(tab.key)}
-                aria-pressed={isActive}
-                className={`font-sans font-medium text-[0.92rem] px-4 py-2 rounded-full border transition cursor-pointer ${
-                  isActive
-                    ? "bg-[#1b2a3a] text-white border-[#1b2a3a] shadow-xs"
-                    : "bg-[#faf8f4] text-[#14161c] border-[#e7e2d8] hover:border-[#1b2a3a]/40"
-                }`}
+              <Link
+                key={feature.id}
+                href={`/features#${feature.category}`}
+                className="group border border-[#e7e2d8] rounded-[14px] p-6 bg-[#faf8f4] hover:border-[#e8572a]/40 hover:shadow-sm transition flex flex-col"
               >
-                {tab.label}
-              </button>
+                <div className="w-10 h-10 rounded-xl bg-[#fdeee7] text-[#e8572a] flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <span className="text-[0.72rem] font-semibold text-[#e8572a] uppercase tracking-wide mb-1.5">
+                  {categoryLabels[feature.category]}
+                </span>
+                <h3 className="font-serif text-lg font-bold text-[#14161c] mb-2 leading-snug">
+                  {feature.title}
+                </h3>
+                <p className="text-[#4a4f5c] text-[0.9rem] leading-relaxed m-0 flex-1">
+                  {feature.highlight}
+                </p>
+                <span className="mt-4 text-sm font-semibold text-[#e8572a] inline-flex items-center gap-1.5">
+                  See what&apos;s included
+                  <ArrowRight
+                    className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
             );
           })}
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredItems.map((svc) => (
-            <article
-              key={svc.id}
-              className="border border-[#e7e2d8] rounded-[14px] p-6 bg-[#faf8f4] hover:border-[#e8572a]/30 transition hover:shadow-xs flex flex-col justify-between"
+        {/* Link to the full list */}
+        <div className="mt-10 bg-[#faf8f4] border border-[#e7e2d8] rounded-[14px] p-6 md:p-7 flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <div>
+            <p className="font-serif text-lg font-bold text-[#14161c] mb-1">
+              That&apos;s the highlight reel.
+            </p>
+            <p className="text-[#4a4f5c] text-sm leading-relaxed max-w-[560px] m-0">
+              All {FEATURES.length} features are listed by category — from
+              kitchen dockets and delivery zones to deposits, stock and
+              bookkeeping exports.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <Link
+              href="/features"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold text-sm bg-[#e8572a] text-white hover:bg-[#d2481e] transition shadow-xs hover:-translate-y-0.5 active:translate-y-0"
             >
-              <div>
-                <span className="text-[0.75rem] font-semibold text-[#e8572a] uppercase tracking-wide">
-                  {svc.categoryLabel}
-                </span>
-                <h3 className="font-serif text-lg font-bold text-[#14161c] mt-1.5 mb-3">
-                  {svc.title}
-                </h3>
-                <ul className="m-0 pl-4 space-y-1.5 text-[#4a4f5c] text-[0.92rem] list-disc">
-                  {svc.bullets.map((bullet, idx) => (
-                    <li key={idx} className="leading-snug">
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
+              See all features
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+            <Link
+              href="#contact"
+              className="inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold text-sm border-2 border-[#14161c] text-[#14161c] hover:bg-[#14161c] hover:text-white transition"
+            >
+              Ask what I&apos;d use
+            </Link>
+          </div>
         </div>
       </div>
     </section>

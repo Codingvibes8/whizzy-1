@@ -12,7 +12,8 @@ A modern, high-performance website migrated from static HTML to **Next.js (App R
   - `Navbar`: Sticky blurred navigation with responsive mobile menu toggle.
   - `Hero`: Eye-catching typography, call-to-actions, and stats cards.
   - `Paths`: Dual starting points for product sellers and food ordering businesses.
-  - `Services`: Dynamic tab filtering by category (`all`, `shop`, `food`, `pay`, `grow`) with clean accessibility attributes.
+  - `Services`: Trimmed highlight reel of four hero features (food ordering, bookings, shop, checkout) linking to the full feature list.
+  - `Features` (`/features`): The complete feature list, grouped by category (food & takeaway, bookings, selling products, payments, marketing).
   - `Process`: 4-step clear project breakdown.
   - `Comparison`: High-contrast subscription comparison table.
   - `Pricing`: Transparent fixed tiers with featured badge highlighting.
@@ -67,7 +68,9 @@ npm run start
 │   ├── app/
 │   │   ├── globals.css      # Tailwind v4 import & custom @theme tokens
 │   │   ├── layout.tsx       # Root layout with fonts & metadata
-│   │   └── page.tsx         # Main landing page combining sections
+│   │   ├── page.tsx         # Main landing page combining sections
+│   │   └── features/
+│   │       └── page.tsx     # Full feature list grouped by category
 │   └── components/
 │       ├── Comparison.tsx   # Subscription vs custom build comparison
 │       ├── Contact.tsx      # Contact form & details
@@ -78,7 +81,10 @@ npm run start
 │       ├── Paths.tsx        # Starting point cards
 │       ├── Pricing.tsx      # Pricing cards
 │       ├── Process.tsx      # 4-step development process
-│       └── Services.tsx     # Filterable services grid
+│       └── Services.tsx     # Homepage feature highlight reel
+│   └── lib/
+│       ├── clerk.ts         # Clerk enablement check
+│       └── features.ts      # Feature catalogue shared by both sections
 ├── next.config.ts           # Next.js configuration
 ├── postcss.config.mjs       # Tailwind CSS v4 PostCSS plugin
 ├── tsconfig.json            # TypeScript configuration

@@ -219,7 +219,7 @@
     /* paths */
     .paths {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       margin-top: 40px;
     }
@@ -248,6 +248,239 @@
 
     @media (max-width: 560px) {
       .paths {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* demos */
+    .demos {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+    }
+
+    .demos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .demo-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(20, 22, 28, .07);
+      border-color: rgba(232, 87, 42, .4);
+    }
+
+    .browser-bar {
+      background: #f3efe8;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .browser-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .browser-url {
+      background: rgba(255, 255, 255, .85);
+      border: 1px solid #ded8cb;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: .73rem;
+      font-family: monospace;
+      color: var(--ink-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 170px;
+    }
+
+    .demo-status-pill {
+      font-size: .68rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      border: 1px solid #f5cfbf;
+      white-space: nowrap;
+    }
+
+    .demo-preview-canvas {
+      padding: 20px;
+      background: linear-gradient(180deg, #faf8f4 0%, #ffffff 100%);
+      border-bottom: 1px solid #f0ece3;
+    }
+
+    .demo-preview-pill {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      color: var(--deep);
+    }
+
+    .demo-preview-title {
+      font-family: Fraunces, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--ink);
+      margin: 0 0 4px;
+    }
+
+    .demo-preview-sub {
+      font-size: .78rem;
+      color: var(--ink-2);
+      margin: 0 0 14px;
+    }
+
+    .demo-mini-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .demo-mini-item {
+      background: #fff;
+      border: 1px solid #eae5dc;
+      border-radius: 8px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .78rem;
+    }
+
+    .demo-mini-item b {
+      color: var(--ink);
+      display: block;
+    }
+
+    .demo-mini-item small {
+      color: var(--ink-2);
+      font-size: .7rem;
+    }
+
+    .demo-mini-price {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--deep);
+    }
+
+    .demo-body {
+      padding: 24px;
+    }
+
+    .demo-service-num {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .demo-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 8px;
+      margin: 18px 0;
+      text-align: center;
+    }
+
+    .demo-stat-col small {
+      display: block;
+      font-size: .66rem;
+      color: var(--ink-2);
+      text-transform: uppercase;
+    }
+
+    .demo-stat-col b {
+      font-family: Fraunces, serif;
+      font-size: .95rem;
+      color: var(--ink);
+    }
+
+    .demo-features {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      font-size: .82rem;
+      color: var(--ink-2);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .demo-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.35;
+    }
+
+    .demo-features li::before {
+      content: "✓";
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .demo-footer {
+      padding: 20px 24px;
+      border-top: 1px solid #f0ece3;
+      background: #faf8f4;
+    }
+
+    .demo-footer .btn {
+      width: 100%;
+      text-align: center;
+      padding: 12px 18px;
+      font-size: .92rem;
+    }
+
+    .demo-slot-hint {
+      display: block;
+      text-align: center;
+      font-size: .72rem;
+      color: var(--ink-2);
+      margin-top: 8px;
+    }
+
+    @media (max-width: 960px) {
+      .demos-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -545,6 +778,7 @@
     <div class="wrap">
       <a class="logo" href="#">Forge<span>&</span>Pixel</a>
       <nav aria-label="Main">
+        <a href="#demos">Demo Stores</a>
         <a href="#services">Services</a>
         <a href="#process">How it works</a>
         <a href="#pricing">Pricing</a>
@@ -580,17 +814,268 @@
         <h2>Pick your starting point</h2>
         <div class="paths">
           <div class="path">
-            <div class="ico" aria-hidden="true">🛍️</div>
-            <h3>Sell products</h3>
-            <p>Online shop with sizes and variants, click & collect, delivery rules, digital downloads and private trade
-              pricing.</p>
+            <div class="ico" aria-hidden="true">🍕</div>
+            <h3>Take orders online</h3>
+            <p>Your own ordering site with no delivery-app cut: delivery zones, table QR ordering, collection slots and
+              printed kitchen dockets.</p>
           </div>
           <div class="path">
-            <div class="ico" aria-hidden="true">🍕</div>
-            <h3>Take food orders</h3>
-            <p>Your own ordering site with no delivery-app cut: delivery zones, table QR ordering and kitchen dockets.
-            </p>
+            <div class="ico" aria-hidden="true">📅</div>
+            <h3>Accept bookings</h3>
+            <p>Live appointment slots with buffers, deposits to stop no-shows, per-staff schedules and automatic
+              email &amp; WhatsApp reminders.</p>
           </div>
+          <div class="path">
+            <div class="ico" aria-hidden="true">🛍️</div>
+            <h3>Sell products</h3>
+            <p>Online shop with sizes and variants, click &amp; collect, delivery rules, digital downloads and private
+              trade pricing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO STORES SECTION (Order: 1. Take orders online, 2. Accept bookings, 3. Sell products) -->
+    <section id="demos" class="demos">
+      <div class="wrap">
+        <span class="eyebrow">Interactive Demo Stores</span>
+        <h2>See how your customers will experience your site</h2>
+        <p>Explore live sample stores for our core services. Try out mobile checkout, fast load times, and custom features before launching your own.</p>
+
+        <div class="demos-grid">
+          <!-- DEMO 1: TAKE ORDERS ONLINE -->
+          <article class="demo-card">
+            <div>
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span style="background:#e38573"></span>
+                  <span style="background:#f1ca74"></span>
+                  <span style="background:#9bc995"></span>
+                </div>
+                <div class="browser-url">https://order.crustandcraft.co.uk</div>
+                <span class="demo-status-pill">Ready for URL</span>
+              </div>
+
+              <div class="demo-preview-canvas">
+                <span class="demo-preview-pill">🍕 Food & Takeaway</span>
+                <h4 class="demo-preview-title">Crust & Craft Pizza</h4>
+                <p class="demo-preview-sub">Open today • 12:00–22:30 • 20-35 min delivery</p>
+                <div class="demo-mini-list">
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Margherita D.O.P</b>
+                      <small>San Marzano, fresh mozzarella & basil</small>
+                    </div>
+                    <span class="demo-mini-price">£11.50</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Hot Honey Nduja</b>
+                      <small>Spicy sausage & wildflower hot honey</small>
+                    </div>
+                    <span class="demo-mini-price">£13.50</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Truffle Rosemary Fries</b>
+                      <small>Hand-cut with parmesan dip</small>
+                    </div>
+                    <span class="demo-mini-price">£4.50</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="demo-body">
+                <span class="demo-service-num">Service 01</span>
+                <h3>Take orders online</h3>
+                <p>Phone-first ordering for collection, delivery & table QR codes. No commission per order, live allergen filtering, and printed kitchen slips.</p>
+
+                <div class="demo-stats-row">
+                  <div class="demo-stat-col">
+                    <small>Commission</small>
+                    <b>0%</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Checkout</small>
+                    <b>&lt; 25s</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Table QR</small>
+                    <b>Included</b>
+                  </div>
+                </div>
+
+                <ul class="demo-features">
+                  <li>Radius & postcode delivery fee tiers</li>
+                  <li>Table QR dine-in ordering with Apple Pay</li>
+                  <li>Clean printable kitchen dockets & slips</li>
+                  <li>Opening hours & pre-order scheduling</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="demo-footer">
+              <!-- FUTURE LINK: Paste your live food demo URL in href below -->
+              <a class="btn btn-primary" href="#contact">Launch Demo Store ↗</a>
+              <span class="demo-slot-hint">🔗 Slot ready: update href with your live store link</span>
+            </div>
+          </article>
+
+          <!-- DEMO 2: ACCEPT BOOKINGS -->
+          <article class="demo-card">
+            <div>
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span style="background:#e38573"></span>
+                  <span style="background:#f1ca74"></span>
+                  <span style="background:#9bc995"></span>
+                </div>
+                <div class="browser-url">https://book.havenandmane.co.uk</div>
+                <span class="demo-status-pill">Ready for URL</span>
+              </div>
+
+              <div class="demo-preview-canvas">
+                <span class="demo-preview-pill">📅 Salon & Services</span>
+                <h4 class="demo-preview-title">Haven & Mane Studio</h4>
+                <p class="demo-preview-sub">Next slot available: Tomorrow at 10:15 AM</p>
+                <div class="demo-mini-list">
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Signature Cut & Beard Trim</b>
+                      <small>45 mins • with Alex or Sam</small>
+                    </div>
+                    <span class="demo-mini-price">£36.00</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Hot Towel Facial & Shave</b>
+                      <small>30 mins • essential oils</small>
+                    </div>
+                    <span class="demo-mini-price">£28.00</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Full Re-style & Conditioning</b>
+                      <small>60 mins • senior stylist</small>
+                    </div>
+                    <span class="demo-mini-price">£45.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="demo-body">
+                <span class="demo-service-num">Service 02</span>
+                <h3>Accept bookings</h3>
+                <p>Clean client appointment scheduling with live calendar buffers, upfront Stripe deposits to eradicate no-shows, and team schedule management.</p>
+
+                <div class="demo-stats-row">
+                  <div class="demo-stat-col">
+                    <small>No-Shows</small>
+                    <b>Down 85%</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Deposits</small>
+                    <b>Stripe</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Sync</small>
+                    <b>Google/iCal</b>
+                  </div>
+                </div>
+
+                <ul class="demo-features">
+                  <li>Real-time calendar slots with custom buffers</li>
+                  <li>Upfront deposit protection via Apple/Google Pay</li>
+                  <li>Staff selection with individual hours</li>
+                  <li>Automated WhatsApp & email confirmations</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="demo-footer">
+              <!-- FUTURE LINK: Paste your live bookings demo URL in href below -->
+              <a class="btn btn-primary" href="#contact">Launch Demo Store ↗</a>
+              <span class="demo-slot-hint">🔗 Slot ready: update href with your live store link</span>
+            </div>
+          </article>
+
+          <!-- DEMO 3: SELL PRODUCTS -->
+          <article class="demo-card">
+            <div>
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span style="background:#e38573"></span>
+                  <span style="background:#f1ca74"></span>
+                  <span style="background:#9bc995"></span>
+                </div>
+                <div class="browser-url">https://shop.monolithgoods.co.uk</div>
+                <span class="demo-status-pill">Ready for URL</span>
+              </div>
+
+              <div class="demo-preview-canvas">
+                <span class="demo-preview-pill">🛍️ Retail & Shop</span>
+                <h4 class="demo-preview-title">Monolith Coffee Roasters</h4>
+                <p class="demo-preview-sub">Free UK postage on orders over £30</p>
+                <div class="demo-mini-list">
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Ethiopia Yirgacheffe</b>
+                      <small>250g / 1kg • Wholebean or Filter</small>
+                    </div>
+                    <span class="demo-mini-price">£11.00</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Signature House Blend No. 4</b>
+                      <small>Medium-dark roast • single origin</small>
+                    </div>
+                    <span class="demo-mini-price">£9.50</span>
+                  </div>
+                  <div class="demo-mini-item">
+                    <div>
+                      <b>Ceramic Dripper & Filters</b>
+                      <small>Matte black glaze set</small>
+                    </div>
+                    <span class="demo-mini-price">£28.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="demo-body">
+                <span class="demo-service-num">Service 03</span>
+                <h3>Sell products</h3>
+                <p>High-conversion boutique ecommerce for independent makers. Handles sizes, variants, stock tracking, click & collect slots, and trade wholesale access.</p>
+
+                <div class="demo-stats-row">
+                  <div class="demo-stat-col">
+                    <small>Load Time</small>
+                    <b>0.6s</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Trade Gate</small>
+                    <b>Passcode</b>
+                  </div>
+                  <div class="demo-stat-col">
+                    <small>Collect</small>
+                    <b>Time Slots</b>
+                  </div>
+                </div>
+
+                <ul class="demo-features">
+                  <li>Sizes, flavours, grinds & variant tracking</li>
+                  <li>Click & collect pickup window selector</li>
+                  <li>Passcode-protected wholesale trade pricing</li>
+                  <li>Instant 1-click Apple Pay & Google Pay</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="demo-footer">
+              <!-- FUTURE LINK: Paste your live ecommerce demo URL in href below -->
+              <a class="btn btn-primary" href="#contact">Launch Demo Store ↗</a>
+              <span class="demo-slot-hint">🔗 Slot ready: update href with your live store link</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>

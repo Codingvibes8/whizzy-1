@@ -1,6 +1,12 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import { clerkEnabled } from "@/lib/clerk";
 
-export default clerkMiddleware();
+// When Clerk is not configured, fall through to the public site instead of
+// letting clerkMiddleware throw a missing-publishable-key error at runtime.
+export default clerkEnabled
+  ? clerkMiddleware()
+  : () => NextResponse.next();
 
 export const config = {
   matcher: [
