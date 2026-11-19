@@ -19,6 +19,7 @@ A modern, high-performance website migrated from static HTML to **Next.js (App R
   - `Pricing`: Transparent fixed tiers with featured badge highlighting.
   - `Faq`: Interactive animated FAQ accordions.
   - `Contact`: Interactive inquiry form with feedback states and email dispatch.
+  - `DemoStores`: Live preview cards covering the three service categories, each linking to its Vercel deployment plus deep links (menu, reservations, kitchen display, admin).
   - `Footer`: Dynamic year and back-to-top navigation.
 
 ## 🔐 Clerk Authentication Setup
@@ -74,6 +75,7 @@ npm run start
 │   └── components/
 │       ├── Comparison.tsx   # Subscription vs custom build comparison
 │       ├── Contact.tsx      # Contact form & details
+│       ├── DemoStores.tsx   # Live demo store cards, deep links & highlights modal
 │       ├── Faq.tsx          # Collapsible FAQ items
 │       ├── Footer.tsx       # Site footer
 │       ├── Hero.tsx         # Hero banner & statistics

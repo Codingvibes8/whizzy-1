@@ -9,12 +9,8 @@ import {
   ShoppingBag,
   Check,
   ArrowRight,
-  Clock,
   Sparkles,
-  Smartphone,
   Eye,
-  ShieldCheck,
-  ChevronRight,
   Info,
 } from "lucide-react";
 
@@ -22,22 +18,24 @@ import {
  * =========================================================================
  * DEMO STORES CONFIGURATION
  * -------------------------------------------------------------------------
- * When you are ready to provide your real demo store links in the future,
- * simply update the `demoUrl` field in the array below.
- * You can also update the `storeName`, `status`, or preview images.
+ * Each card below points at a live demo deployment on Vercel. To swap or
+ * add a demo, update `demoUrl` (and optionally `quickLinks`, `storeName`,
+ * `stats`, `keyFeatures` and `mockupData`) in the matching entry.
  * =========================================================================
  */
 export interface DemoStoreItem {
   id: string;
   order: number;
+  serviceNumber: 1 | 2 | 3; // Which of the three services this demo showcases
   serviceCategory: "orders" | "bookings" | "products";
   serviceTitle: string; // Ordered: 1. Take orders online, 2. Accept bookings, 3. Sell products
   storeName: string;
   tagline: string;
   description: string;
   mockDomain: string;
-  demoUrl: string; // <-- Place your future live demo link here
-  isLive: boolean; // Set to true when your live demo URL is ready
+  demoUrl: string; // Live demo deployment URL
+  isLive: boolean; // True when `demoUrl` points at a working demo
+  quickLinks?: { label: string; href: string }[]; // Deep links inside a live demo
   badge: string;
   icon: typeof Utensils;
   stats: { label: string; value: string }[];
@@ -53,122 +51,192 @@ export interface DemoStoreItem {
 }
 
 export const DEMO_STORES: DemoStoreItem[] = [
-  // 1. TAKE ORDERS ONLINE (First)
+  // TAKE ORDERS ONLINE — food ordering (pizza)
   {
     id: "demo-orders",
     order: 1,
+    serviceNumber: 1,
     serviceCategory: "orders",
     serviceTitle: "Take orders online",
-    storeName: "Crust & Craft Artisan Pizza",
-    tagline: "Independent takeaway, delivery & dine-in table ordering",
+    storeName: "Vibes Pizza — Marylebone",
+    tagline: "Wood-fired pizzeria with click & collect, delivery & table ordering",
     description:
-      "A fast, phone-first food ordering system with zero commission on sales. Features interactive menu categories, dietary badges, postcode delivery fees, and automated kitchen dockets.",
-    mockDomain: "order.crustandcraft.co.uk",
-    demoUrl: "#", // 💡 FUTURE LINK: Paste your food ordering demo URL here
-    isLive: false,
+      "A complete direct-ordering storefront for a 500°C sourdough pizzeria. A 22-dish menu with dietary badges, delivery and collection modes across four London sites, basket checkout, live order tracking, a kitchen display and an admin dashboard — all with zero commission on sales.",
+    mockDomain: "pizz-sigma.vercel.app",
+    demoUrl: "https://pizz-sigma.vercel.app/",
+    isLive: true,
+    quickLinks: [
+      { label: "Menu", href: "https://pizz-sigma.vercel.app/menu" },
+      { label: "Reservations", href: "https://pizz-sigma.vercel.app/reservations" },
+      { label: "Live tracker", href: "https://pizz-sigma.vercel.app/orders/VP-9482" },
+      { label: "Kitchen", href: "https://pizz-sigma.vercel.app/kitchen" },
+      { label: "Admin", href: "https://pizz-sigma.vercel.app/admin" },
+    ],
     badge: "Food & Hospitality",
     icon: Utensils,
     stats: [
       { label: "Commission fee", value: "0%" },
-      { label: "Checkout speed", value: "< 25s" },
-      { label: "Table QR support", value: "Built-in" },
+      { label: "Menu dishes", value: "22" },
+      { label: "Oven temp", value: "500°C" },
     ],
     keyFeatures: [
-      "Allergen & dietary badges (GF, Vegan, Halal)",
-      "Radius & postcode-based delivery fees",
-      "Table QR ordering with instant card & Apple Pay",
-      "Printable kitchen tickets & live status tracker",
+      "72-hour sourdough menu with dietary & allergen badges",
+      "Delivery, click & collect and dine-in table ordering",
+      "Basket checkout plus live order status tracker",
+      "Kitchen display (/kitchen) and owner admin dashboard",
     ],
     mockupData: {
       accentColor: "#e8572a",
       pillText: "🍕 Food & Takeaway Demo",
-      title: "Crust & Craft Kitchen",
-      subtitle: "Open today • 12:00 – 22:30 • 20-35 min delivery",
+      title: "Vibes Pizza — Marylebone",
+      subtitle: "Open daily 12:00 – 23:00 • 20 min avg. prep",
       previewBadge: "Zero-Commission Ordering",
       sampleItems: [
-        { name: "Wood-Fired Margherita D.O.P", price: "£11.50", extra: "San Marzano, fresh basil" },
-        { name: "Hot Honey & Spicy Nduja", price: "£13.50", extra: "Hot honey drizzle" },
-        { name: "Truffle Rosemary Skinny Fries", price: "£4.50", extra: "Parmesan dip" },
+        { name: 'Smoked Pepperoni & Hot Honey (14")', price: "£22.00", extra: "Hot honey drizzle" },
+        { name: 'All-Nighter Vodka Sauce & Buffalo (14")', price: "£19.50", extra: "Campania buffalo mozzarella" },
+        { name: 'Truffle Wild Mushroom & Taleggio (14")', price: "£24.00", extra: "Wood-roasted forest mushrooms" },
       ],
     },
   },
 
-  // 2. ACCEPT BOOKINGS (Second)
+  // ACCEPT BOOKINGS — table reservations & kitchen ops
   {
     id: "demo-bookings",
-    order: 2,
+    order: 3,
+    serviceNumber: 2,
     serviceCategory: "bookings",
     serviceTitle: "Accept bookings",
-    storeName: "Haven & Mane Grooming Studio",
-    tagline: "Appointments, staff schedules & deposit protection",
+    storeName: "Saffron & Ember — Soho & NW2",
+    tagline: "Table reservations, private dining & live kitchen operations",
     description:
-      "A friction-free appointment scheduling portal. Clients select their favourite stylist or service, choose live calendar slots with automatic buffers, and pay deposits to eliminate no-shows.",
-    mockDomain: "book.havenandmane.co.uk",
-    demoUrl: "#", // 💡 FUTURE LINK: Paste your booking demo URL here
-    isLive: false,
-    badge: "Appointments & Studios",
+      "A modern Indian kitchen demo covering the full booking journey: date, time and party-size reservations for the Soho dining room, private-dining enquiries, plus live order tracking, a tandoor kitchen display and an admin command centre.",
+    mockDomain: "saffron-sooty-phi.vercel.app",
+    demoUrl: "https://saffron-sooty-phi.vercel.app/",
+    isLive: true,
+    quickLinks: [
+      { label: "Reservations", href: "https://saffron-sooty-phi.vercel.app/reservations" },
+      { label: "Menu", href: "https://saffron-sooty-phi.vercel.app/menu" },
+      { label: "Order tracker", href: "https://saffron-sooty-phi.vercel.app/orders/SE-8492" },
+      { label: "Kitchen KDS", href: "https://saffron-sooty-phi.vercel.app/kitchen" },
+      { label: "Admin", href: "https://saffron-sooty-phi.vercel.app/admin" },
+    ],
+    badge: "Dining & Reservations",
     icon: Calendar,
     stats: [
-      { label: "No-show cut", value: "Down 85%" },
-      { label: "Deposit payments", value: "Stripe" },
-      { label: "Calendar sync", value: "Google/iCal" },
+      { label: "Table bookings", value: "Live" },
+      { label: "Private dining", value: "16 guests" },
+      { label: "Kitchen sync", value: "Live KDS" },
     ],
     keyFeatures: [
-      "Real-time calendar availability with custom buffers",
-      "Upfront deposit or full payment via Apple/Google Pay",
-      "Team member selection with individual working hours",
-      "Automated SMS & WhatsApp appointment confirmations",
+      "Date, time and party-size table reservation flow",
+      "Private dining & group enquiries for up to 16 guests",
+      "Live order tracker with tandoor kitchen display (/kitchen)",
+      "Admin portal for orders, bookings and menu stock (/admin)",
     ],
     mockupData: {
       accentColor: "#1b2a3a",
-      pillText: "📅 Appointment Booking Demo",
-      title: "Haven & Mane Studio",
-      subtitle: "Next available: Tomorrow at 10:15 AM",
-      previewBadge: "Live Calendar & Deposits",
+      pillText: "📅 Reservation & Ordering Demo",
+      title: "Saffron & Ember",
+      subtitle: "Soho W1 & NW2 • Book a table in three taps",
+      previewBadge: "Live Calendar & Kitchen Sync",
       sampleItems: [
-        { name: "Signature Haircut & Beard Trim", price: "£36.00", extra: "45 mins • with Alex" },
-        { name: "Luxury Hot Towel Head Shave", price: "£28.00", extra: "30 mins • with Sam" },
-        { name: "Full Re-style & Conditioning", price: "£45.00", extra: "60 mins • with Senior" },
+        { name: "Old Delhi Smoked Butter Chicken", price: "£19.95", extra: "24-hour marinade • Medium" },
+        { name: "Awadhi Saffron Lamb Dum Biryani", price: "£22.50", extra: "Aged basmati • Halal" },
+        { name: "Emperor's Grand Tandoor Feast (For 2)", price: "£58.00", extra: "Chef's signature sharing platter" },
       ],
     },
   },
 
-  // 3. SELL PRODUCTS (Third)
+  // TAKE ORDERS ONLINE — food ordering (Cantonese)
   {
-    id: "demo-products",
-    order: 3,
-    serviceCategory: "products",
-    serviceTitle: "Sell products",
-    storeName: "Monolith Coffee & Goods",
-    tagline: "Speciality retail, multi-variants & click and collect",
+    id: "demo-orders-dragon",
+    order: 2,
+    serviceNumber: 1,
+    serviceCategory: "orders",
+    serviceTitle: "Take orders online",
+    storeName: "Golden Dragon — Soho",
+    tagline: "Cantonese institution taking direct orders and table bookings",
     description:
-      "A lightning-fast ecommerce boutique built for independent makers. Handles complex size and variant matrices, stock tracking, click & collect collection windows, and private wholesale gates.",
-    mockDomain: "shop.monolithgoods.co.uk",
-    demoUrl: "#", // 💡 FUTURE LINK: Paste your ecommerce shop demo URL here
-    isLive: false,
-    badge: "Retail & Makers",
-    icon: ShoppingBag,
+      "A heritage restaurant storefront taking orders direct: Peking duck, dim sum and wok dishes with a live order basket, collection or local delivery, and table reservations — no marketplace commission or aggregator fees.",
+    mockDomain: "golden-dragon888.vercel.app",
+    demoUrl: "https://golden-dragon888.vercel.app/",
+    isLive: true,
+    quickLinks: [
+      { label: "Menu & order", href: "https://golden-dragon888.vercel.app/#menu" },
+      { label: "Gallery", href: "https://golden-dragon888.vercel.app/#gallery" },
+      { label: "Reservations", href: "https://golden-dragon888.vercel.app/#reserve" },
+    ],
+    badge: "Food & Hospitality",
+    icon: Utensils,
     stats: [
-      { label: "Page load", value: "0.6s" },
-      { label: "Wholesale gate", value: "Passcode" },
-      { label: "Click & Collect", value: "Slot picker" },
+      { label: "Commission fee", value: "0%" },
+      { label: "Prep time", value: "20–25 min" },
+      { label: "Trading since", value: "1988" },
     ],
     keyFeatures: [
-      "Multi-variant selectors (Sizes, colours, grinds, packs)",
-      "Click & Collect checkout with designated pickup time slots",
-      "Wholesale & trade pricing with password-protected catalogs",
-      "Automated packing slips, shipping labels & inventory alerts",
+      "Full à la carte catalogue with add-to-order basket",
+      "Direct checkout for collection or local delivery",
+      "Table reservations & private dining requests online",
+      "Menu, story and gallery sections built mobile-first",
     ],
     mockupData: {
       accentColor: "#d97706",
-      pillText: "🛍️ Online Shop Demo",
-      title: "Monolith Roasters",
-      subtitle: "Free UK shipping on orders over £30",
-      previewBadge: "Fast Variant Checkout",
+      pillText: "🥡 Direct Ordering Demo",
+      title: "Golden Dragon 金龙",
+      subtitle: "42 Gerrard St, Soho • Free collection",
+      previewBadge: "Basket, Checkout & Collection",
       sampleItems: [
-        { name: "Ethiopia Yirgacheffe (250g / 1kg)", price: "£11.00", extra: "Whole bean or Ground" },
-        { name: "Signature Espresso Blend No. 4", price: "£9.50", extra: "Medium-Dark roast" },
-        { name: "Ceramic Minimalist Dripper Set", price: "£28.00", extra: "Includes 40 filters" },
+        { name: "Roast Peking Duck", price: "£46.00", extra: "24-hour dried • carved tableside" },
+        { name: "Har Gow & Siu Mai Platter", price: "£6.50", extra: "Dim sum trolley 12–4pm" },
+        { name: "Char Siu Pork", price: "£15.00", extra: "Honey-glazed • roast oven" },
+      ],
+    },
+  },
+
+  // SELL PRODUCTS — retail catalogue
+  {
+    id: "demo-products",
+    order: 4,
+    serviceNumber: 3,
+    serviceCategory: "products",
+    serviceTitle: "Sell products",
+    storeName: "Stride & Style",
+    tagline: "Premium shoes & menswear with size and colour variants",
+    description:
+      "A variant-rich retail storefront for premium footwear and menswear: category, sale and newest filters, size and colour pickers per product, a persistent cart and customer accounts — built to handle a real product catalogue.",
+    mockDomain: "stride-styles.vercel.app",
+    demoUrl: "https://stride-styles.vercel.app/",
+    isLive: true,
+    quickLinks: [
+      { label: "Shop all", href: "https://stride-styles.vercel.app/products" },
+      { label: "Shoes", href: "https://stride-styles.vercel.app/products?category=shoes" },
+      { label: "Clothing", href: "https://stride-styles.vercel.app/products?category=clothing" },
+      { label: "Sale", href: "https://stride-styles.vercel.app/products?sale=true" },
+      { label: "Cart", href: "https://stride-styles.vercel.app/cart" },
+    ],
+    badge: "Retail & Makers",
+    icon: ShoppingBag,
+    stats: [
+      { label: "Catalogue", value: "Shoes + Apparel" },
+      { label: "Variants", value: "Size & colour" },
+      { label: "Accounts", value: "Sign-in" },
+    ],
+    keyFeatures: [
+      "Category, sale and newest filters across the catalogue",
+      "Size and colour variant pickers per product",
+      "Persistent cart with customer account sign-in",
+      "Promotional home page with featured products & categories",
+    ],
+    mockupData: {
+      accentColor: "#1b2a3a",
+      pillText: "🛍️ Online Shop Demo",
+      title: "Stride & Style",
+      subtitle: "Premium shoes & menswear • New arrivals weekly",
+      previewBadge: "Variant-Rich Catalogue",
+      sampleItems: [
+        { name: "Nike Air Max 270", price: "$129.99", extra: "Sizes 7–10 • shoes" },
+        { name: "Adidas Ultraboost 22", price: "$189.99", extra: "Boost midsole • shoes" },
+        { name: "Levi's 501 Original Jeans", price: "$89.99", extra: "Sizes 30–36 • clothing" },
       ],
     },
   },
@@ -178,10 +246,13 @@ export default function DemoStores() {
   const [activeTab, setActiveTab] = useState<"all" | "orders" | "bookings" | "products">("all");
   const [previewModalStore, setPreviewModalStore] = useState<DemoStoreItem | null>(null);
 
-  const displayedDemos =
+  const displayedDemos = (
     activeTab === "all"
       ? DEMO_STORES
-      : DEMO_STORES.filter((store) => store.serviceCategory === activeTab);
+      : DEMO_STORES.filter((store) => store.serviceCategory === activeTab)
+  )
+    .slice()
+    .sort((a, b) => a.serviceNumber - b.serviceNumber || a.order - b.order);
 
   return (
     <section id="demos" className="py-20 md:py-28 bg-[#faf8f4] border-t border-[#e7e2d8] relative">
@@ -251,7 +322,7 @@ export default function DemoStores() {
         </div>
 
         {/* Demo Cards Grid (Ordered: 1. Take orders online -> 2. Accept bookings -> 3. Sell products) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {displayedDemos.map((demo) => {
             const Icon = demo.icon;
 
@@ -272,7 +343,19 @@ export default function DemoStores() {
 
                     <div className="bg-white/80 border border-[#ded8cb] rounded-md px-2.5 py-0.5 text-[0.72rem] text-[#4a4f5c] font-mono truncate max-w-[180px] sm:max-w-[210px] flex items-center gap-1">
                       <span className="text-emerald-600 font-bold">https://</span>
-                      {demo.mockDomain}
+                      {demo.isLive ? (
+                        <a
+                          href={demo.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-[#e8572a] hover:underline truncate"
+                          title={`Open ${demo.mockDomain}`}
+                        >
+                          {demo.mockDomain}
+                        </a>
+                      ) : (
+                        <span className="truncate">{demo.mockDomain}</span>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-1">
@@ -354,7 +437,7 @@ export default function DemoStores() {
                       </div>
                       <div>
                         <span className="text-[0.7rem] font-bold uppercase tracking-wider text-[#e8572a] block">
-                          Service #{demo.order}
+                          Service #{demo.serviceNumber}
                         </span>
                         <h3 className="font-serif text-xl font-bold text-[#14161c] leading-tight">
                           {demo.serviceTitle}
@@ -425,17 +508,33 @@ export default function DemoStores() {
                       </button>
                     )}
 
+                    {demo.isLive && demo.quickLinks && demo.quickLinks.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-1.5 px-0.5">
+                        {demo.quickLinks.map((link) => (
+                          <a
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[0.7rem] font-medium px-2.5 py-1 rounded-full border border-[#e7e2d8] bg-white text-[#4a4f5c] hover:border-[#e8572a]/50 hover:text-[#e8572a] transition"
+                          >
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+
                     <div className="flex items-center justify-between text-[0.72rem] text-[#6b7280] px-1">
                       <span className="flex items-center gap-1">
                         <Info className="w-3 h-3 text-[#e8572a]" />
-                        <span>Ready for custom URL</span>
+                        <span>{demo.isLive ? "Live on Vercel" : "Ready for custom URL"}</span>
                       </span>
                       <button
                         type="button"
                         onClick={() => setPreviewModalStore(demo)}
                         className="text-[#e8572a] hover:underline font-medium cursor-pointer"
                       >
-                        How to connect →
+                        {demo.isLive ? "Demo highlights →" : "How to connect →"}
                       </button>
                     </div>
                   </div>
@@ -445,7 +544,7 @@ export default function DemoStores() {
           })}
         </div>
 
-        {/* Informative helper callout for future store links */}
+        {/* Callout: custom demo provisioning */}
         <div className="mt-12 bg-white border border-[#e7e2d8] rounded-[16px] p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#fdeee7] text-[#e8572a] flex items-center justify-center shrink-0 mt-0.5">
@@ -453,11 +552,12 @@ export default function DemoStores() {
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#14161c] mb-1">
-                Have existing store links or want custom demo staging?
+                Want a store like these for your business?
               </h3>
               <p className="text-[#4a4f5c] text-sm leading-relaxed max-w-[620px]">
-                These demo cards are built modularly in the code. Whenever you are ready, provide your
-                live store links to easily link &ldquo;Take orders online&rdquo;, &ldquo;Accept bookings&rdquo;, or &ldquo;Sell products&rdquo;.
+                Every card above is a working build — browse the menu, place a test order, reserve a
+                table or open the kitchen display. We can provision the same stack for your trade,
+                with your menu, branding and payments.
               </p>
             </div>
           </div>
@@ -479,7 +579,7 @@ export default function DemoStores() {
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#f0ece3]">
               <div>
                 <span className="text-[0.72rem] font-bold text-[#e8572a] uppercase tracking-wider block mb-1">
-                  Demo Slot • Service #{previewModalStore.order}
+                  Demo Slot • Service #{previewModalStore.serviceNumber}
                 </span>
                 <h3 className="font-serif text-xl font-bold text-[#14161c]">
                   {previewModalStore.serviceTitle}
@@ -503,30 +603,53 @@ export default function DemoStores() {
             <div className="py-5 space-y-4">
               <div className="bg-[#faf8f4] p-4 rounded-xl border border-[#e7e2d8]">
                 <span className="text-xs font-semibold text-[#14161c] block mb-1">
-                  Ready for your live demo URL:
+                  {previewModalStore.isLive ? "Live demo deployment:" : "Ready for your live demo URL:"}
                 </span>
-                <p className="text-xs text-[#4a4f5c] leading-relaxed mb-3">
-                  To wire your live store to this demo button, simply update the{" "}
-                  <code className="bg-[#ede8df] px-1.5 py-0.5 rounded text-[0.75rem] font-mono text-[#1b2a3a]">
-                    demoUrl
-                  </code>{" "}
-                  property in{" "}
-                  <code className="bg-[#ede8df] px-1.5 py-0.5 rounded text-[0.75rem] font-mono text-[#1b2a3a]">
-                    src/components/DemoStores.tsx
-                  </code>
-                  :
-                </p>
 
-                <div className="bg-[#1b2a3a] text-slate-100 p-3 rounded-lg text-xs font-mono overflow-x-auto">
-                  <span className="text-emerald-400">// In DEMO_STORES [{previewModalStore.order - 1}]:</span>
-                  <br />
-                  <span className="text-amber-300">serviceTitle:</span> &quot;{previewModalStore.serviceTitle}&quot;,
-                  <br />
-                  <span className="text-amber-300">demoUrl:</span> &quot;
-                  <span className="text-emerald-300">https://your-{previewModalStore.serviceCategory}-demo.com</span>&quot;,
-                  <br />
-                  <span className="text-amber-300">isLive:</span> <span className="text-cyan-300">true</span>
-                </div>
+                {previewModalStore.isLive ? (
+                  <>
+                    <p className="text-xs text-[#4a4f5c] leading-relaxed mb-3">
+                      This store is deployed and fully interactive. Open it to try the customer
+                      journey end to end — menu, basket, checkout, bookings and order tracking.
+                    </p>
+                    <a
+                      href={previewModalStore.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 max-w-full text-[0.75rem] font-mono text-[#1b2a3a] bg-white border border-[#ded8cb] rounded-lg px-3 py-2 hover:border-[#e8572a]/60 hover:text-[#e8572a] transition"
+                    >
+                      <span className="truncate">{previewModalStore.mockDomain}</span>
+                      <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs text-[#4a4f5c] leading-relaxed mb-3">
+                      To wire your live store to this demo button, simply update the{" "}
+                      <code className="bg-[#ede8df] px-1.5 py-0.5 rounded text-[0.75rem] font-mono text-[#1b2a3a]">
+                        demoUrl
+                      </code>{" "}
+                      property in{" "}
+                      <code className="bg-[#ede8df] px-1.5 py-0.5 rounded text-[0.75rem] font-mono text-[#1b2a3a]">
+                        src/components/DemoStores.tsx
+                      </code>
+                      :
+                    </p>
+
+                    <div className="bg-[#1b2a3a] text-slate-100 p-3 rounded-lg text-xs font-mono overflow-x-auto">
+                      <span className="text-emerald-400">
+                        // In DEMO_STORES [{DEMO_STORES.findIndex((store) => store.id === previewModalStore.id)}]:
+                      </span>
+                      <br />
+                      <span className="text-amber-300">serviceTitle:</span> &quot;{previewModalStore.serviceTitle}&quot;,
+                      <br />
+                      <span className="text-amber-300">demoUrl:</span> &quot;
+                      <span className="text-emerald-300">https://your-{previewModalStore.serviceCategory}-demo.com</span>&quot;,
+                      <br />
+                      <span className="text-amber-300">isLive:</span> <span className="text-cyan-300">true</span>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div>
