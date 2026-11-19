@@ -240,6 +240,54 @@ export const DEMO_STORES: DemoStoreItem[] = [
       ],
     },
   },
+
+  // SELL PRODUCTS — footwear catalogue
+  {
+    id: "demo-products-flexshoes",
+    order: 5,
+    serviceNumber: 3,
+    serviceCategory: "products",
+    serviceTitle: "Sell products",
+    storeName: "FlexShoes",
+    tagline: "Premium footwear hall spanning sneakers, running, boots and formal",
+    description:
+      "A footwear-first retail storefront for a multi-brand shoe shop: six curated categories from sneakers and running to boots and formal, quick-add from the grid, full product pages, a sale section and a home page built around featured pairs.",
+    mockDomain: "flexshoes.vercel.app",
+    demoUrl: "https://flexshoes.vercel.app/",
+    isLive: true,
+    quickLinks: [
+      { label: "Shop all", href: "https://flexshoes.vercel.app/products" },
+      { label: "Sneakers", href: "https://flexshoes.vercel.app/products?category=sneakers" },
+      { label: "Running", href: "https://flexshoes.vercel.app/products?category=running" },
+      { label: "Formal", href: "https://flexshoes.vercel.app/products?category=formal" },
+      { label: "Sale", href: "https://flexshoes.vercel.app/sale" },
+    ],
+    badge: "Retail & Footwear",
+    icon: ShoppingBag,
+    stats: [
+      { label: "Catalogue", value: "6 categories" },
+      { label: "Brands", value: "Nike · Adidas" },
+      { label: "Quick add", value: "1 tap" },
+    ],
+    keyFeatures: [
+      "Category browsing across sneakers, running, boots, formal, sandals & casual",
+      "Quick Add straight from the product grid and load-more catalogue",
+      "Individual product pages with brand, imagery and pricing",
+      "Dedicated sale section plus featured products on the home page",
+    ],
+    mockupData: {
+      accentColor: "#0f172a",
+      pillText: "👟 Footwear Shop Demo",
+      title: "FlexShoes",
+      subtitle: "Step into excellence • Premium footwear collection",
+      previewBadge: "Multi-Brand Footwear Catalogue",
+      sampleItems: [
+        { name: "Nike Air Max 270 Men's", price: "$149.99", extra: "Nike • sneakers" },
+        { name: "New Balance FuelCell Rebel v4", price: "$159.99", extra: "New Balance • running" },
+        { name: "Red Wing Iron Ranger Boot", price: "$349.99", extra: "Red Wing • boots" },
+      ],
+    },
+  },
 ];
 
 export default function DemoStores() {
